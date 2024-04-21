@@ -45,11 +45,7 @@ if (isset($_POST['username'])) {
     $_SESSION['password'] = $_POST['password'];
     $password = $_SESSION['password'];
 
-<<<<<<< HEAD
-    if ($username == 123 ) {
-=======
     if ($username == 123 && $password == 123) {
->>>>>>> 0aafc5b408aca4b25cc24cffcdabbd4a3bbf6a32
         header("Location: index.php");
     } else {
         echo "zly login";
