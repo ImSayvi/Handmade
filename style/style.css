@@ -1,29 +1,66 @@
-body{
-    background: rgb(85,113,142);
-    background: linear-gradient(292deg, rgba(85,113,142,1) 47%, rgba(49,184,227,1) 100%);
-    background-repeat: no-repeat;
-    height: 550px;
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Ubuntu:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Ubuntu:wght@400;500;700&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
 }
 
-form{
-    margin-left: 70px;
+body{
+    background: linear-gradient(292deg, rgb(117, 154, 194) 47%, rgba(49,184,227,1) 100%);
 }
+.container-sm{
+    font-family: 'Ubuntu', sans-serif; 
+    height: 100vh; 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+}
+
 
 input::placeholder{
     text-align: center;
     opacity: 0.3;
-    color: #fff;
+    color: #ff0000;
+}
+
+input[type="checkbox"] {
+    background: none;
+    border-radius: 2px;
+    border: 2px solid #ffffff79;
+}
+input[type="checkbox"]:checked{
+    border: 2px solid #ffffff79;
+}
+
+.form-control:focus {
+    background: rgba(53, 199, 243, 0.6); 
+    outline: none; 
+    text-align: center;
 }
 
 .form-control{
     border-radius: 40px;
-    background: rgba(49,184,227,0.3);
-    width: 50%;
-    /*margin-left: 50px;*/
+    background: rgba(53, 199, 243, 0.3);
     border: none;
+    text-align: center;
+    width: 300px;
 }
 
-#container {
-    width: 500px;
-    margin-top: 15%;
+.form-check{
+    margin-top: 30px;
+    color: #ffffff79;
+    display: flex;
+    justify-content: space-between;
+
 }
+
+  .btn-primary{
+    margin-top: 30px;
+    border: none;
+    border-radius: 40px;
+    width: 100%;
+  }
+
