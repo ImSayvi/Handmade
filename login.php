@@ -1,5 +1,6 @@
 <?php
 session_start();
+require_once('db.php');
 ?>
 
 <!DOCTYPE html>
@@ -36,21 +37,29 @@ session_start();
 
 </html>
 
-
 <?php
 
-if (isset($_POST['username'])) {
+if (isset($_POST['username']) && isset($_POST['password'])) {
     $_SESSION['username'] = $_POST['username'];
     $username = $_SESSION['username'];
     $_SESSION['password'] = $_POST['password'];
     $password = $_SESSION['password'];
 
-    if ($username == 123 && $password == 123) {
+    $sqlQueryUsers = "SELECT * FROM users WHERE username = '$username' AND password = '$password'";
+    $result = $conn->query($sqlQueryUsers);
+
+
+    $row = mysqli_fetch_row($result);
+    $login = $row[1];
+    $pass = $row[2];
+
+    var_dump($login);
+    var_dump($pass);
+
+
+    if ($username == $login  && $password == $pass) {
         header("Location: index.php");
     } else {
         echo "zly login";
     }
-} else {
-    echo 'siurekssie';
-    echo var_dump($username);
 }
