@@ -15,6 +15,7 @@ body{
     font-family: 'Ubuntu', sans-serif; 
     height: 100vh; 
     display: flex; 
+    flex-direction: column;
     justify-content: center; 
     align-items: center; 
 }
@@ -46,6 +47,7 @@ input[type="checkbox"]:checked{
     background: rgba(53, 199, 243, 0.3);
     border: none;
     text-align: center;
+    justify-content: center;
     width: 300px;
 }
 
@@ -53,14 +55,13 @@ input[type="checkbox"]:checked{
     margin-top: 30px;
     color: #ffffff79;
     display: flex;
-    justify-content: space-between;
-
+    justify-content: center; 
 }
 
   .btn-primary{
     margin-top: 30px;
     border: none;
     border-radius: 40px;
-    width: 100%;
+    width: 300px;
   }
 

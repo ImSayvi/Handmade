@@ -10,7 +10,6 @@ require_once('db.php');
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <script src="https://kit.fontawesome.com/988d321f51.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="style/style.css">
     <title>Document</title>
 </head>
@@ -21,18 +20,19 @@ require_once('db.php');
             <div class="mb-3">
                 <label for="username" class="form-label"></label>
                 <input type="text" class="form-control" name="username" id="username" aria-describedby="emailHelp" placeholder="Login">
-                
             </div>
+
             <div class="mb-3">
                 <label for="exampleInputPassword1" class="form-label"></label>
                 <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
                 
             </div>
             <div class="mb-3 form-check">
-                <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                <label class="form-check-label" for="exampleCheck1">Remember me</label>
-                <label for="">|</label>
+                <!-- <input type="checkbox" class="form-check-input" id="exampleCheck1"> -->
+                <label class="form-check-label" for="exampleCheck1"><a href="register.php">Sign Up</a></label>
                 
+                <label for="">|</label>
+               
                 <label class="form-check-label" for="exampleCheck2">Forgot password</label>
             </div>
             <button type="Sign up" class="btn btn-primary">Log in</button>
@@ -66,3 +66,5 @@ if (isset($_POST['username'])) {
     echo 'siurekssie';
     echo var_dump($username);
 }
+
+
