@@ -4,7 +4,7 @@ require('db.php');
 
 if (isset($_GET['id_category'])) {
     $id_category = $_GET['id_category'];
-} 
+}
 
 
 $sql = "SELECT * FROM handicrafts WHERE id_category = $id_category";
@@ -28,11 +28,11 @@ $result = $conn->query($sql);
 
     <?php
     if ($result->num_rows > 0) {
-        while($row = $result->fetch_assoc()) {
+        while ($row = mysqli_fetch_row($result)) {
             echo '<div class="card" style="width: 18rem;">';
             echo '<img src="..." class="card-img-top" alt="...">';
             echo '<div class="card-body">';
-            echo '<p class="card-text">' . $row["name"] . ': ' . $row["description"] . '</p>';
+            echo '<p class="card-text">' . $row[1] . ': ' . $row[2] . '</p>';
             echo '</div>';
             echo '</div>';
         }

@@ -36,7 +36,7 @@ var_dump($result);
             </div>
             <div class="mb-3">
                 <label for="file" class="form-label">Załącznik</label>
-                <input type="text" class="form-control" id="file">
+                <input type="text" class="form-control" id="file" name="file">
             </div>
             <div class="mb-3">
                 <label for="category" class="form-label">Kategoria</label>
@@ -64,7 +64,11 @@ if (isset($_POST['name']) && !empty($_POST['description']) && isset($_POST['cate
     $name = $_SESSION['name'];
     $_SESSION['description'] = $_POST['description'];
     $description = $_SESSION['description'];
+    $_SESSION['file'] = $_POST['file'];
+    $file = $_SESSION['file'];
+    
     $category_id = $_POST['category']; 
+
 
     $sqlQueryProduct = "INSERT INTO handmade.handicrafts (name, description, id_category) VALUES ('$name', '$description', '$category_id')";
     $result = $conn->query($sqlQueryProduct);
