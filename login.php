@@ -1,6 +1,7 @@
 <?php
 session_start();
 require_once('db.php');
+$showError = false;
 ?>
 
 <!DOCTYPE html>
@@ -17,7 +18,18 @@ require_once('db.php');
 <body>
     <div id="container" class="container-sm">
         <form method="POST">
+        <?php
+
+if ($showError) {
+
+    echo ' <div class="alert alert-danger  
+alert-dismissible fade show" role="alert">  
+<strong>Error!</strong> ' . $showError . '  
+</div> ';
+}
+?>
             <div class="mb-3">
+  
                 <label for="username" class="form-label"></label>
                 <input type="text" class="form-control" name="username" id="username" aria-describedby="emailHelp" placeholder="Login">
             </div>
@@ -57,6 +69,7 @@ if (isset($_POST['username'])) {
 
     $row = mysqli_fetch_row($result);
 
+if (!empty($username) && !empty($password)){
     if ($row[1] == $username && $row[2] == $password) {
         header("Location: index.php");
     } else {
@@ -66,5 +79,8 @@ if (isset($_POST['username'])) {
     echo 'siurekssie';
     echo var_dump($username);
 }
+}else{
+    $showError = 'fill the fields';
+}
 
-
+?>
