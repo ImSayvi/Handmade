@@ -54,10 +54,9 @@ alert-dismissible fade show" role="alert">
 
 </html>
 
-
 <?php
 
-if (isset($_POST['username'])) {
+if (isset($_POST['username']) && isset($_POST['password'])) {
     $_SESSION['username'] = $_POST['username'];
     $username = $_SESSION['username'];
     $_SESSION['password'] = $_POST['password'];
@@ -75,9 +74,6 @@ if (!empty($username) && !empty($password)){
     } else {
         echo "zly login";
     }
-} else {
-    echo 'siurekssie';
-    echo var_dump($username);
 }
 }else{
     $showError = 'fill the fields';
