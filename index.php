@@ -18,7 +18,7 @@ session_start();
 <body>
     <div class="cards">
         <div class="card container-sm">
-            <img src="/images/category/forest.jpg" class="card-img-top" alt="...">
+            <img src="images/category/forest.jpg" class="card-img-top" alt="...">
 
             <div class="card-body">
                 <h5 class="card-title">kategoria 1</h5>
@@ -27,7 +27,7 @@ session_start();
             </div>
         </div>
         <div class="card container-sm">
-            <img src="/images/category/card.jpg" class="card-img-top" alt="...">
+            <img src="images/category/card.jpg" class="card-img-top" alt="...">
 
             <div class="card-body">
                 <h5 class="card-title">kategoria 2</h5>
@@ -37,7 +37,7 @@ session_start();
             </div>
         </div>
         <div class="card container-sm">
-            <img src="/images/category/man.jpg" class="card-img-top" alt="...">
+            <img src="images/category/man.jpg" class="card-img-top" alt="...">
 
             <div class="card-body">
                 <h5 class="card-title">kateogria 3</h5>
@@ -47,7 +47,7 @@ session_start();
             </div>
         </div>
         <div class="card container-sm">
-            <img src="/images/category/mobile.jpg" class="card-img-top" alt="...">
+            <img src="images/category/mobile.jpg" class="card-img-top" alt="...">
 
             <div class="card-body">
                 <h5 class="card-title">kategoria 4</h5>
