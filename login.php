@@ -1,6 +1,7 @@
 <?php
 session_start();
 require_once('db.php');
+$showError = false;
 ?>
 
 <!DOCTYPE html>
@@ -17,20 +18,36 @@ require_once('db.php');
 <body>
     <div id="container" class="container-sm">
         <form method="POST">
+        <?php
+
+if ($showError) {
+
+    echo ' <div class="alert alert-danger  
+alert-dismissible fade show" role="alert">  
+<strong>Error!</strong> ' . $showError . '  
+</div> ';
+}
+?>
             <div class="mb-3">
-                <label for="username" class="form-label">Email address</label>
-                <input type="text" class="form-control" name="username" id="username" aria-describedby="emailHelp">
-                <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+  
+                <label for="username" class="form-label"></label>
+                <input type="text" class="form-control" name="username" id="username" aria-describedby="emailHelp" placeholder="Login">
             </div>
+
             <div class="mb-3">
-                <label for="exampleInputPassword1" class="form-label">Password</label>
-                <input type="password" name="password" class="form-control" id="exampleInputPassword1">
+                <label for="exampleInputPassword1" class="form-label"></label>
+                <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                
             </div>
             <div class="mb-3 form-check">
-                <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                <!-- <input type="checkbox" class="form-check-input" id="exampleCheck1"> -->
+                <label class="form-check-label" for="exampleCheck1"><a href="register.php">Sign Up</a></label>
+                
+                <label for="">|</label>
+               
+                <label class="form-check-label" for="exampleCheck2">Forgot password</label>
             </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="Sign up" class="btn btn-primary">Log in</button>
         </form>
     </div>
 </body>
@@ -45,21 +62,21 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
     $_SESSION['password'] = $_POST['password'];
     $password = $_SESSION['password'];
 
-    $sqlQueryUsers = "SELECT * FROM users WHERE username = '$username' AND password = '$password'";
-    $result = $conn->query($sqlQueryUsers);
+    $sql = "SELECT * FROM users WHERE username = '$username' AND password = '$password'";
 
+    $result = mysqli_query($conn, $sql);
 
     $row = mysqli_fetch_row($result);
-    $login = $row[1];
-    $pass = $row[2];
 
-    var_dump($login);
-    var_dump($pass);
-
-
-    if ($username == $login  && $password == $pass) {
+if (!empty($username) && !empty($password)){
+    if ($row[1] == $username && $row[2] == $password) {
         header("Location: index.php");
     } else {
         echo "zly login";
     }
 }
+}else{
+    $showError = 'fill the fields';
+}
+
+?>
