@@ -3,7 +3,6 @@
 	margin-bottom: 50px;
 	padding: 20px;
 	border-radius: 10px;
-
 	box-shadow: 0 0 500px 0 rgba(0, 0, 0, 0.1);
 	background: linear-gradient(292deg, rgb(117, 154, 194) 47%, rgba(49, 184, 227, 1) 100%);
 }
@@ -15,6 +14,7 @@
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
+	width: 750px !important;
 }
 
 button {
