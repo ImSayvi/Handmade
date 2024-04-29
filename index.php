@@ -2,7 +2,10 @@
 session_start();
 require_once "db.php";
 
+$sql = "SELECT * FROM handmade.categories";
+$result = $conn->query($sql);
 
+// dokonczyc wyswietlanie kategorii w index.php wraz z opisem
 
 
 ?>

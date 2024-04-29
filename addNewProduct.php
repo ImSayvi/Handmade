@@ -5,6 +5,22 @@ require('db.php');
 $sqlQueryCategories = "SELECT * FROM handmade.categories";
 $result = $conn->query($sqlQueryCategories);
 
+if (isset($_POST['name']) && !empty($_POST['description']) && isset($_POST['category'])) {
+    $_SESSION['name'] = $_POST['name'];
+    $name = $_SESSION['name'];
+    $_SESSION['description'] = $_POST['description'];
+    $description = $_SESSION['description'];
+    $_SESSION['file'] = $_POST['file'];
+    $file = $_SESSION['file'];
+
+    $category_id = $_POST['category'];
+
+
+    $sqlQueryProduct = "INSERT INTO handmade.handicrafts (name, description, id_category) VALUES ('$name', '$description', '$category_id')";
+    $conn->query($sqlQueryProduct);
+
+    $conn->close();
+}
 
 
 ?>
@@ -25,6 +41,7 @@ $result = $conn->query($sqlQueryCategories);
 
 
     <div class="container">
+        <h3>Dodaj nowy produkt</h3>
         <div class="form-addNewProduct  container-sm border border-2">
             <form method="POST">
                 <div class="mb-3">
@@ -48,38 +65,23 @@ $result = $conn->query($sqlQueryCategories);
                         }
                         ?>
                     </select>
-
-                    <a href="#"><button type="submit" class="btn btn-dark">Dodaj</button></a>
-                    <a href="index.php"><button type="button" class="btn btn-dark">wróc do strony głównej</button></a>
+                    <div class="buttons">
+                        <a href="#"><button type="submit" class="btn btn-dark">Dodaj</button></a>
+                        <a href="index.php"><button type="button" class="btn btn-dark">wróc do strony głównej</button></a>
+                    </div>
             </form>
         </div>
     </div>
 
+    <?php
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        if (isset($_POST['name']) && !empty($_POST['description']) && isset($_POST['category'])) {
+            echo "<div class='alert alert-success'>Rekord został pomyślnie dodany.</div>";
+        } else {
+            echo "<div class='alert alert-danger'>Wystąpił błąd podczas dodawania rekordu " . $conn->error . "</div>";
+        }
+    }
+    ?>
 </body>
 
 </html>
-
-
-<?php
-if (isset($_POST['name']) && !empty($_POST['description']) && isset($_POST['category'])) {
-    $_SESSION['name'] = $_POST['name'];
-    $name = $_SESSION['name'];
-    $_SESSION['description'] = $_POST['description'];
-    $description = $_SESSION['description'];
-    $_SESSION['file'] = $_POST['file'];
-    $file = $_SESSION['file'];
-
-    $category_id = $_POST['category'];
-
-
-    $sqlQueryProduct = "INSERT INTO handmade.handicrafts (name, description, id_category) VALUES ('$name', '$description', '$category_id')";
-    $result = $conn->query($sqlQueryProduct);
-
-    if ($result) {
-        echo "<div class='alert alert-success'>Rekord został pomyślnie dodany.</div>";
-    } else {
-        echo "<div class='alert alert-danger'>Wystąpił błąd podczas dodawania rekordu: " . $conn->error . "</div>";
-    }
-}
-
-?>
