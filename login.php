@@ -94,4 +94,33 @@ require_once('db.php');
 
 </html>
 
+<<<<<<< HEAD
 
+=======
+<?php
+
+if (isset($_POST['username']) && isset($_POST['password'])) {
+    $_SESSION['username'] = $_POST['username'];
+    $username = $_SESSION['username'];
+    $_SESSION['password'] = $_POST['password'];
+    $password = $_SESSION['password'];
+
+    $sql = "SELECT * FROM users WHERE username = '$username' AND password = '$password'";
+
+    $result = mysqli_query($conn, $sql);
+
+    $row = mysqli_fetch_row($result);
+
+if (!empty($username) && !empty($password)){
+    if ($row[1] == $username && $row[2] == $password) {
+        header("Location: index.php");
+    } else {
+        echo "zly login";
+    }
+}
+}else{
+    $showError = 'fill the fields';
+}
+
+?>
+>>>>>>> 1864e00327b69b23de2fc75f3afeea9b250a5204
