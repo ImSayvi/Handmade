@@ -7,6 +7,7 @@
 .cards {
 	display: flex;
 	margin: 20px;
+	margin-right: 15%;
 }
 .listItem {
 	margin-top: 10px;
