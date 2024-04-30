@@ -10,13 +10,29 @@ if (isset($_POST['name']) && !empty($_POST['description']) && isset($_POST['cate
     $name = $_SESSION['name'];
     $_SESSION['description'] = $_POST['description'];
     $description = $_SESSION['description'];
-    $_SESSION['file'] = $_POST['file'];
-    $file = $_SESSION['file'];
+
+
+
+    if(isset($_FILES['file'])){
+        $errors= array();
+        $file_name = $_FILES['file']['name'];
+        $file_size =$_FILES['file']['size'];
+        $file_tmp =$_FILES['file']['tmp_name'];
+        $file_type=$_FILES['file']['type'];
+
+        if(empty($errors)==true){
+            move_uploaded_file($file_tmp,"images/handicratfs/".$file_name);
+        }else{
+            print_r($errors);
+        }
+    }
+
+
 
     $category_id = $_POST['category'];
 
 
-    $sqlQueryProduct = "INSERT INTO handmade.handicrafts (name, description, id_category) VALUES ('$name', '$description', '$category_id')";
+    $sqlQueryProduct = "INSERT INTO handmade.handicrafts (name, description, id_category, file) VALUES ('$name', '$description', '$category_id', '$file_name')";
     $conn->query($sqlQueryProduct);
 
     $conn->close();
@@ -43,7 +59,7 @@ if (isset($_POST['name']) && !empty($_POST['description']) && isset($_POST['cate
     <div class="container">
         <h3>Dodaj nowy produkt</h3>
         <div class="form-addNewProduct  container-sm border border-2">
-            <form method="POST">
+            <form method="POST" enctype="multipart/form-data">
                 <div class="mb-3">
                     <label for="name" class="form-label">Nazwa</label>
                     <input type="text" class="form-control" id="name" name="name">
@@ -54,7 +70,7 @@ if (isset($_POST['name']) && !empty($_POST['description']) && isset($_POST['cate
                 </div>
                 <div class="mb-3">
                     <label for="file" class="form-label">Załącznik</label>
-                    <input type="text" class="form-control" id="file" name="file">
+                    <input type="file" class="form-control" id="file" name="file">
                 </div>
                 <div class="mb-3">
                     <label for="category" class="form-label">Kategoria</label>

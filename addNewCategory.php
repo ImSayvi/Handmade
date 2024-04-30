@@ -2,17 +2,32 @@
 session_start();
 require_once "db.php";
 
-$sql = "SELECT * FROM handmade.categories";
-$result = $conn->query($sql);
+$sqlCategory = "SELECT * FROM handmade.categories";
+$result = $conn->query($sqlCategory);
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $categoryName = $_POST['name'];
     $categoryDescription = $_POST['description'];
 
-    if (!empty($categoryName) && !empty($categoryDescription)) {
-        $sql = "INSERT INTO handmade.categories (category_name, description) VALUES ('$categoryName', '$categoryDescription')";
+    if(isset($_FILES['file'])){
+        $errors= array();
+        $file_name = $_FILES['file']['name'];
+        $file_size =$_FILES['file']['size'];
+        $file_tmp =$_FILES['file']['tmp_name'];
+        $file_type=$_FILES['file']['type'];
+
+        if(empty($errors)==true){
+            move_uploaded_file($file_tmp,"images/category/".$file_name);
+        }else{
+            print_r($errors);
+        }
+    }
+    if(!empty($categoryName) && !empty($categoryDescription) && !empty($file_name)){
+        $sql = "INSERT INTO handmade.categories (category_name, description, file) VALUES ('$categoryName', '$categoryDescription', '$file_name')";
         $conn->query($sql);
         $conn->close();
+
+        
     }
 }
 
@@ -34,7 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <div class="container">
     <h3>Dodaj nową kategorię</h3>
     <div class="form-addNewProduct  container-sm border border-2">
-        <form method="POST">
+        <form method="POST" enctype="multipart/form-data">      
             <div class="mb-3">
                 <label for="name" class="form-label">Nazwa</label>
                 <input type="text" class="form-control" id="name" name="name">
@@ -43,7 +58,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <label for="description" class="form-label">Opis</label>
                 <input type="text" class="form-control" id="description" name="description">
             </div>
-
+            <div class="mb-3">
+                    <label for="file" class="form-label">Załącznik</label>
+                    <input type="file" class="form-control" id="file" name="file">
+                </div>
             <div class="buttons">
                 <a href="#"><button type="submit" class="btn btn-dark">Dodaj</button></a>
                 <a href="index.php"><button type="button" class="btn btn-dark">wróc do strony głównej</button></a>
