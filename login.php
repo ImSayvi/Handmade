@@ -5,8 +5,6 @@ require_once('db.php');
 
  if (isset($_POST['username']) && isset($_POST['password'])) {
      
-
-
     $stmt = $conn->prepare("SELECT id, password FROM users WHERE username = ?");
     $stmt->bind_param("s", $username);
 
