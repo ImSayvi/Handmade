@@ -4,7 +4,7 @@ session_start();
 require_once('db.php');
 
  if (isset($_POST['username']) && isset($_POST['password'])) {
-    if(!empty($username) && !empty($password)){
+     
 
 
     $stmt = $conn->prepare("SELECT id, password FROM users WHERE username = ?");
@@ -16,6 +16,7 @@ require_once('db.php');
     $stmt->execute();
     $stmt->store_result();
 
+    if(($username!="") && ($password!="")){
     if ($stmt->num_rows > 0) {
 
         $stmt->bind_result($id, $hashed_password);
@@ -36,9 +37,10 @@ require_once('db.php');
 
     $stmt->close();
     $conn->close();
-}else{
-    $showError= "Fill all the fields";
-}}
+ }else{
+     $showError= "Fill all the fields";
+    }
+ }
 ?>
 
 <!DOCTYPE html>
@@ -57,12 +59,7 @@ require_once('db.php');
 <body>
     <div id="container" class="container-sm">
     <img src="img/welcome2.png" alt="Welcome" height="200px" >
-        <form method="POST" action="login.php">
-          
-        
-            <div class="mb-3">
             <?php
-            
             if ($showError) {
                 echo ' <div class="alert alert-danger  
                 alert-dismissible fade show" role="alert">  
@@ -70,6 +67,11 @@ require_once('db.php');
                 </div> ';
             }
             ?>
+        <form method="POST" action="login.php">
+          
+        
+            <div class="mb-3">
+
 
                 <label for="username" class="form-label"></label>
                 <input type="text" class="form-control" name="username" id="username" aria-describedby="emailHelp" placeholder="Login">
@@ -94,33 +96,4 @@ require_once('db.php');
 
 </html>
 
-<<<<<<< HEAD
 
-=======
-<?php
-
-if (isset($_POST['username']) && isset($_POST['password'])) {
-    $_SESSION['username'] = $_POST['username'];
-    $username = $_SESSION['username'];
-    $_SESSION['password'] = $_POST['password'];
-    $password = $_SESSION['password'];
-
-    $sql = "SELECT * FROM users WHERE username = '$username' AND password = '$password'";
-
-    $result = mysqli_query($conn, $sql);
-
-    $row = mysqli_fetch_row($result);
-
-if (!empty($username) && !empty($password)){
-    if ($row[1] == $username && $row[2] == $password) {
-        header("Location: index.php");
-    } else {
-        echo "zly login";
-    }
-}
-}else{
-    $showError = 'fill the fields';
-}
-
-?>
->>>>>>> 1864e00327b69b23de2fc75f3afeea9b250a5204
