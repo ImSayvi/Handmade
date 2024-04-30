@@ -20,6 +20,15 @@ body{
     align-items: center; 
 }
 
+img {
+    max-width: 100px; 
+    opacity: 0.5; 
+}
+
+.mb-3{
+    display: flex;
+    justify-content: center; 
+}
 
 input::placeholder{
     text-align: center;
@@ -53,9 +62,9 @@ input[type="checkbox"]:checked{
 
 .form-check{
     margin-top: 30px;
-    color: #ffffff79;
+    color: #ffffff;
     display: flex;
-    justify-content: center; 
+    justify-content: space-between; 
 }
 
   .btn-primary{

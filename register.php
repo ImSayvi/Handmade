@@ -13,7 +13,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = $_POST["password"];
     $repeatPass = $_POST["repeatPassword"];
 
-   
+
     if (!empty($username) && !empty($password) && !empty($repeatPass)) {
 
         $sql = "Select * from users where username='$username'";
@@ -44,7 +44,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $exists = "Username not available";
         }
     } else {
-       
+
         $showError = "Fill all the fields";
     }
 }
@@ -67,42 +67,33 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
     <div id="container" class="container-sm">
+    <img src="img/createAcc.png" alt="Welcome" height="200px" >
+    <?php
 
+if ($showAlert) {
+    echo ' <div class="alert alert-success  
+    alert-dismissible fade show" role="alert"> 
+    <strong>Success!</strong> Your account is  
+    now created and you can login.  
+    </div> ';
+}
+
+if ($showError) {
+    echo ' <div class="alert alert-danger  
+    alert-dismissible fade show" role="alert">  
+    <strong>Error!</strong> ' . $showError . '  
+    </div> ';
+}
+
+if ($exists) {
+    echo ' <div class="alert alert-danger  
+    alert-dismissible fade show" role="alert"> 
+    <strong>Error!</strong> ' . $exists . '
+    </div> ';
+}
+
+?>
         <form method="POST" action="register.php">
-
-            <?php
-
-            if ($showAlert) {
-
-                echo ' <div class="alert alert-success  
-            alert-dismissible fade show" role="alert"> 
-    
-            <strong>Success!</strong> Your account is  
-            now created and you can login.  
-        
-        </div> ';
-            }
-
-            if ($showError) {
-
-                echo ' <div class="alert alert-danger  
-            alert-dismissible fade show" role="alert">  
-        <strong>Error!</strong> ' . $showError . '  
-         </div> ';
-            }
-
-            if ($exists) {
-                echo ' <div class="alert alert-danger  
-            alert-dismissible fade show" role="alert"> 
-    
-        <strong>Error!</strong> ' . $exists . '
-          
-             
-        </button> 
-       </div> ';
-            }
-
-            ?>
 
             <div class="mb-3">
                 <label for="username" class="form-label"></label>
