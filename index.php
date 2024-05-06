@@ -7,14 +7,10 @@ $max_id_result = $conn->query($max_id_query);
 $max_id_row = $max_id_result->fetch_assoc();
 $max_id = $max_id_row['max_id'];
 
-for ($i = 0; $i <= $max_id; $i++) {
-$sql = "SELECT category_name, description FROM categories WHERE id = $i";
-$result = $conn->query($sql);
-$row = $result->fetch_assoc();
-$category_name = $row["category_name"];
-$description = $row["description"];
-}
 
+
+$sqlQueryCategories = "SELECT * FROM handmade.categories";
+$result = $conn->query($sqlQueryCategories);
 
 ?>
 
@@ -49,16 +45,16 @@ $description = $row["description"];
         <div class="cards">
 
         <?php
-
+        while ($row = $result->fetch_assoc()) {
         echo
             '<div class="card container-sm">
                 <img src="images/category/forest.jpg" class="card-img-top" alt="...">
                 <div class="card-body">
-                    <h5 class="card-title">'. $category_name .'</h5>
-                    <p class="card-text">'. $description .'</p>
-                    <a href="categories.php?id_category='.$i.'" class="btn btn-primary">Go somewhere</a>
+                    <h5 class="card-title">'. $row['category_name'] .'</h5>
+                    <p class="card-text">'. $row['description'] .'</p>
+                    <a href="categories.php?id_category='.$row['id'].'" class="btn btn-primary">Go somewhere</a>
                 </div>  
-            </div>';
+            </div>';}
 
         ?>
 
