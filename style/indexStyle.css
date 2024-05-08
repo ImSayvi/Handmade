@@ -47,11 +47,14 @@ img {
 	text-decoration: none;
 }
 
-.btn {
-	margin-top: 30px;
 
+
+.sideBar_menu .btn {
+	margin-top: 30px;
 	min-width: 200px;
 }
+
+
 ul {
 	list-style-type: none;
 }

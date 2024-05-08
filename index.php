@@ -38,6 +38,9 @@ $result = $conn->query($sqlQueryCategories);
                     <a href="addNewCategory.php"><button type="button" class="btn btn-dark">Dodaj nową kategorie</button></a>
                 </li>
                 <li class="listItem">
+                    <a href=""><button type="button" class="btn btn-dark">Usuń kategorie</button></a>
+                </li>
+                <li class="listItem">
                     <a href="logout.php"><button type="button" class="btn btn-dark">wyloguj</button></a>
                 </li>
             </ul>
@@ -52,7 +55,10 @@ $result = $conn->query($sqlQueryCategories);
                 <div class="card-body">
                     <h5 class="card-title">'. $row['category_name'] .'</h5>
                     <p class="card-text">'. $row['description'] .'</p>
-                    <a href="categories.php?id_category='.$row['id'].'" class="btn btn-primary">Przejdź do kategorii</a>
+                    <div class="cardBtns">
+                        <a href="categories.php?id_category='.$row['id'].'" class="btn btn-primary">Przejdź do kategorii</a>
+                        <a href="" class="btn btn-primary delete"><i class="fa-solid fa-trash" style="color: #ffffff;"></i></a>
+                    </div>
                 </div>  
             </div>';}
 
@@ -61,6 +67,7 @@ $result = $conn->query($sqlQueryCategories);
 
         </div>
 
+<script src="https://kit.fontawesome.com/988d321f51.js" crossorigin="anonymous"></script>
 
 </body>
 
