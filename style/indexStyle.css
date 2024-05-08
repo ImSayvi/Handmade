@@ -2,12 +2,15 @@
 	width: auto;
 	height: auto;
 	margin: 10px 10px;
-	min-height: 200px;
+	min-height: 150px;
+	max-width: calc(33.33% - 20px);
 }
 .cards {
 	display: flex;
-	margin: 20px;
-	margin-right: 15%;
+	flex-wrap: wrap;
+	margin: 20px auto; 
+    max-width: 100%;
+	margin-left: 50px;
 }
 .listItem {
 	margin-top: 10px;
@@ -17,15 +20,26 @@ img {
 	height: 240px;
 	border-radius: 10px;
 }
+
 .sidebar_menu li {
 	margin-bottom: 10px;
 }
 .container {
 	display: flex;
+	position: relative;
 	flex-direction: row;
 	justify-content: center;
 	align-items: center;
-	height: 100vh;
+	min-height: 100vh;
+	margin-left: 200px;
+}
+
+.sideBar_menu {
+    position: fixed;
+    left: 0;
+    width: 150px;
+    top: 50%;
+    transform: translateY(-50%); 
 }
 
 .sidebar_menu a {
@@ -54,4 +68,5 @@ ul {
 
 body {
 	background: linear-gradient(292deg, rgb(117, 154, 194) 47%, rgba(49, 184, 227, 1) 100%);
+	background-repeat: no-repeat;
 }

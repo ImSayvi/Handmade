@@ -83,7 +83,7 @@ if (isset($_POST['name']) && !empty($_POST['description']) && isset($_POST['cate
                     </select>
                     <div class="buttons">
                         <a href="#"><button type="submit" class="btn btn-dark">Dodaj</button></a>
-                        <a href="index.php"><button type="button" class="btn btn-dark">wróc do strony głównej</button></a>
+                        <a href="index.php"><button type="button" class="btn btn-dark">wróć do strony głównej</button></a>
                     </div>
             </form>
         </div>
