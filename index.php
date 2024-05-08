@@ -48,11 +48,11 @@ $result = $conn->query($sqlQueryCategories);
         while ($row = $result->fetch_assoc()) {
         echo
             '<div class="card container-sm">
-                <img src="images/category/forest.jpg" class="card-img-top" alt="...">
+                <img src="images/category/forest.jpg" class="card-img-top" alt='. $row['category_name'] .'>
                 <div class="card-body">
                     <h5 class="card-title">'. $row['category_name'] .'</h5>
                     <p class="card-text">'. $row['description'] .'</p>
-                    <a href="categories.php?id_category='.$row['id'].'" class="btn btn-primary">Go somewhere</a>
+                    <a href="categories.php?id_category='.$row['id'].'" class="btn btn-primary">Przejdź do kategorii</a>
                 </div>  
             </div>';}
 
