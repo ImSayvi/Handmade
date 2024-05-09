@@ -2,15 +2,9 @@
 session_start();
 require_once "db.php";
 
-$max_id_query = "SELECT MAX(id) AS max_id FROM categories";
-$max_id_result = $conn->query($max_id_query);
-$max_id_row = $max_id_result->fetch_assoc();
-$max_id = $max_id_row['max_id'];
-
-
-
 $sqlQueryCategories = "SELECT * FROM handmade.categories";
 $result = $conn->query($sqlQueryCategories);
+
 
 ?>
 
@@ -57,7 +51,10 @@ $result = $conn->query($sqlQueryCategories);
                     <p class="card-text">'. $row['description'] .'</p>
                     <div class="cardBtns">
                         <a href="categories.php?id_category='.$row['id'].'" class="btn btn-primary">Przejdź do kategorii</a>
-                        <a href="" class="btn btn-primary delete"><i class="fa-solid fa-trash" style="color: #ffffff;"></i></a>
+                        <form method="post">
+                            <input type="hidden" name="category_id" value="'.$row['id'].'">
+                            <button type="submit" class="btn btn-primary delete" name="delete_category"><i class="fa-solid fa-trash" style="color: #ffffff;"></i></button>
+                        </form>
                     </div>
                 </div>  
             </div>';}
@@ -69,6 +66,28 @@ $result = $conn->query($sqlQueryCategories);
 
 <script src="https://kit.fontawesome.com/988d321f51.js" crossorigin="anonymous"></script>
 
+
+<?php
+
+
+if (isset($_POST['delete_category'])) {
+    $categoryId = $_POST['category_id'];
+
+    
+    $deleteQuery = "DELETE FROM categories WHERE id = ?";
+    $statement = $conn->prepare($deleteQuery);
+    $statement->bind_param('i', $categoryId);
+    
+    if ($statement->execute()) {
+        exit();
+    } else {
+        echo "Wystąpił błąd podczas usuwania kategorii.";
+    }
+
+    $statement->close();
+    $conn->close();
+}
+?>
 </body>
 
 </html>
