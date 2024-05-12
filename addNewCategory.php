@@ -17,7 +17,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $file_type=$_FILES['file']['type'];
 
         if(empty($errors)==true){
-            move_uploaded_file($file_tmp,"images/category/".$file_name);
+            list($width, $height) = getimagesize($file_tmp);
+            $newWidth = 360;
+            $newHeight = 240;
+
+            $imageResized = imagecreatetruecolor($newWidth, $newHeight);
+            $imageTmp = imagecreatefromjpeg($file_tmp);
+            imagecopyresampled($imageResized, $imageTmp, 0, 0, 0, 0, $newWidth, $newHeight, $width, $height);
+            imagejpeg($imageResized, "images/category/".$file_name);
+            imagedestroy($imageResized);
+            imagedestroy($imageTmp);
+    
+            // move_uploaded_file($file_tmp,"images/category/".$file_name);
         }else{
             print_r($errors);
         }
