@@ -7,11 +7,8 @@ $max_id_result = $conn->query($max_id_query);
 $max_id_row = $max_id_result->fetch_assoc();
 $max_id = $max_id_row['max_id'];
 
-
-
 $sqlQueryCategories = "SELECT * FROM handmade.categories";
 $result = $conn->query($sqlQueryCategories);
-
 ?>
 
 <!DOCTYPE html>
@@ -55,13 +52,8 @@ $result = $conn->query($sqlQueryCategories);
                     <a href="categories.php?id_category='.$row['id'].'" class="btn btn-primary">Przejdź do kategorii</a>
                 </div>  
             </div>';}
-
         ?>
-
-
         </div>
-
-
 </body>
 
 </html>
