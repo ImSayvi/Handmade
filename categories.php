@@ -25,13 +25,25 @@ $result = $conn->query($sql);
 <body>
 
 
+    <div class="sideBar_menu">
+        <ul>
+            <li class="listItem">
+                <a href="index.php"><button type="button" class="btn btn-dark">Powrót</button></a>
+            </li>
+            <li class="listItem">
+                <a href="addNewProduct.php"><button type="button" class="btn btn-dark">Dodaj nowy produkt</button></a>
+            </li>
+        </ul>
+    </div>
     <div class="container">
-        <a href="index.php"><button type="button" class="btn btn-dark">wroc do strony glownej</button></a>
-        <a href="addNewProduct.php"><button type="button" class="btn btn-dark">dodaj produkt</button></a>
+
+
+        <div class="cards">
+
             <?php
             while ($row = $result->fetch_assoc()) {
-                echo 
-                    '<div class="card container-sm">
+                echo
+                '<div class="card container-sm">
                         <img src="images/handicrafts/' . $row['file'] . '" class="card-img-top" alt=' . $row['name'] . '>
                         <div class="card-body">
                         <h5 class="card-title
@@ -39,8 +51,10 @@ $result = $conn->query($sql);
                         <p class="card-text
                         ' . $row['description'] . '</p>
                     </div>
-                </div>';}
+                </div>';
+            }
             ?>
+        </div>
     </div>
 </body>
 
