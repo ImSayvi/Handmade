@@ -35,7 +35,8 @@ img {
 	justify-content: center;
 	align-items: center;
 	min-height: 100vh;
-	margin-left: 200px;
+	margin-left: 175px;
+	max-width: 1400px;
 }
 
 .sideBar_menu {
@@ -54,7 +55,7 @@ img {
 .btn {
 	margin-top: 30px;
 
-	min-width: 200px;
+	min-width: 180px;
 }
 ul {
 	list-style-type: none;
