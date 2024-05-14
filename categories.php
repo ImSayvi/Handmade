@@ -6,7 +6,7 @@ if (isset($_GET['id_category'])) {
     $id_category = $_GET['id_category'];
 }
 
-$sql = "SELECT * FROM handicrafts WHERE id_category = $id_category";
+$sql = "SELECT * FROM handmade.handicrafts WHERE id_category = $id_category";
 $result = $conn->query($sql);
 ?>
 
@@ -36,20 +36,15 @@ $result = $conn->query($sql);
         </ul>
     </div>
     <div class="container">
-
-
         <div class="cards">
-
             <?php
             while ($row = $result->fetch_assoc()) {
                 echo
                 '<div class="card container-sm">
                         <img src="images/handicrafts/' . $row['file'] . '" class="card-img-top" alt=' . $row['name'] . '>
                         <div class="card-body">
-                        <h5 class="card-title
-                        ' . $row['name'] . '</h5>
-                        <p class="card-text
-                        ' . $row['description'] . '</p>
+                        <h5 class="card-title">'. $row['name'] . '</h5>
+                        <p class="card-text">' . $row['description'] . '</p>
                     </div>
                 </div>';
             }
