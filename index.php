@@ -17,6 +17,7 @@ $result = $conn->query($sqlQueryCategories);
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <!-- <link rel="stylesheet" href="style/style.css"> -->
     <link rel="stylesheet" href="style/indexStyle.css">
+    <script src="/script/script.js"></script>
     <title>Document</title>
 </head>
 
@@ -52,7 +53,7 @@ $result = $conn->query($sqlQueryCategories);
                     <div class="cardBtns">
                         <a href="categories.php?id_category='.$row['id'].'" class="btn btn-primary">Przejdź do kategorii</a>
                         <form method="post">
-                            <input type="hidden" name="category_id" value="'.$row['id'].'">
+                            <input type="hidden" name="category_id" value="'.$row['id'].'" onsubmit="return confirmDelete();">
                             <button type="submit" class="btn btn-primary delete" name="delete_category"><i class="fa-solid fa-trash" style="color: #ffffff;"></i></button>
                         </form>
                     </div>
@@ -88,6 +89,8 @@ if (isset($_POST['delete_category'])) {
     $conn->close();
 }
 ?>
+
+<script src="/script/script.js"></script>
 </body>
 
 </html>
