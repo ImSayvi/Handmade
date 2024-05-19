@@ -3,17 +3,14 @@
 	height: auto;
 	margin: 10px 10px;
 	min-height: 150px;
-	max-width: 350px;
+	max-width: calc(33.33% - 20px);
 }
 .cards {
 	display: flex;
 	flex-wrap: wrap;
 	margin: 20px auto; 
-	margin-left: 10px;
-}
-
-.card-body{
-	justify-content: space-between;
+    max-width: 100%;
+	margin-left: 50px;
 }
 .listItem {
 	margin-top: 10px;
@@ -38,8 +35,8 @@ img {
 	justify-content: center;
 	align-items: center;
 	min-height: 100vh;
-	min-width:  100vh;
-	margin-left: 250px;
+	margin-left: 175px;
+	max-width: 1400px;
 }
 
 .sideBar_menu {
@@ -55,24 +52,13 @@ img {
 	text-decoration: none;
 }
 
-
-
-.sideBar_menu .btn {
+.btn {
 	margin-top: 30px;
-	min-width: 200px;
+
+	min-width: 180px;
 }
-
-
 ul {
 	list-style-type: none;
-}
-
-.cardBtns{
-	display: flex;
-	flex-direction: row;
-	flex-wrap: wrap;
-	justify-content: space-around;
-	
 }
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Ubuntu:wght@400;500;700&display=swap');
@@ -88,5 +74,4 @@ ul {
 body {
 	background: linear-gradient(292deg, rgb(117, 154, 194) 47%, rgba(49, 184, 227, 1) 100%);
 	background-repeat: no-repeat;
-	
 }
