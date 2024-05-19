@@ -5,6 +5,9 @@ require_once "db.php";
 $sqlQueryCategories = "SELECT * FROM handmade.categories";
 $result = $conn->query($sqlQueryCategories);
 
+if (!$result) {
+    die("Query failed: " . $conn->error);
+}
 
 ?>
 
@@ -17,7 +20,7 @@ $result = $conn->query($sqlQueryCategories);
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <!-- <link rel="stylesheet" href="style/style.css"> -->
     <link rel="stylesheet" href="style/indexStyle.css">
-    <script src="/script/script.js"></script>
+    
     <title>Document</title>
 </head>
 
@@ -36,7 +39,7 @@ $result = $conn->query($sqlQueryCategories);
                     <a href=""><button type="button" class="btn btn-dark">Usuń kategorie</button></a>
                 </li>
                 <li class="listItem">
-                    <a href="logout.php"><button type="button" class="btn btn-dark">wyloguj</button></a>
+                    <a href="logout.php"><button type="button" class="btn btn-dark" onsubmit="confirmDelete()">wyloguj</button></a>
                 </li>
             </ul>
         </div>
@@ -46,20 +49,21 @@ $result = $conn->query($sqlQueryCategories);
         while ($row = $result->fetch_assoc()) {
         echo
             '<div class="card container-sm">
-                <img src="images/category/forest.jpg" class="card-img-top" alt='. $row['category_name'] .'>
+                <img src="images/category/forest.jpg" class="card-img-top" alt="obrazek">
                 <div class="card-body">
                     <h5 class="card-title">'. $row['category_name'] .'</h5>
                     <p class="card-text">'. $row['description'] .'</p>
                     <div class="cardBtns">
                         <a href="categories.php?id_category='.$row['id'].'" class="btn btn-primary">Przejdź do kategorii</a>
-                        <form method="post">
-                            <input type="hidden" name="category_id" value="'.$row['id'].'" onsubmit="return confirmDelete();">
+                        <form method="post" onsubmit="confirmDelete();">
+                            <input type="hidden" name="category_id" value="'.$row['id'].'">
                             <button type="submit" class="btn btn-primary delete" name="delete_category"><i class="fa-solid fa-trash" style="color: #ffffff;"></i></button>
                         </form>
                     </div>
                 </div>  
             </div>';}
 
+        
         ?>
 
 
@@ -69,12 +73,10 @@ $result = $conn->query($sqlQueryCategories);
 
 
 <?php
-
-
 if (isset($_POST['delete_category'])) {
+    require_once "db.php"; 
     $categoryId = $_POST['category_id'];
 
-    
     $deleteQuery = "DELETE FROM categories WHERE id = ?";
     $statement = $conn->prepare($deleteQuery);
     $statement->bind_param('i', $categoryId);
@@ -84,6 +86,7 @@ if (isset($_POST['delete_category'])) {
     } else {
         echo "Wystąpił błąd podczas usuwania kategorii.";
     }
+
 
     $statement->close();
     $conn->close();

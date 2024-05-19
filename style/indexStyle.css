@@ -9,8 +9,11 @@
 	display: flex;
 	flex-wrap: wrap;
 	margin: 20px auto; 
-    
 	margin-left: 10px;
+}
+
+.card-body{
+	justify-content: space-between;
 }
 .listItem {
 	margin-top: 10px;
