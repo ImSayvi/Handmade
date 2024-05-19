@@ -3,14 +3,17 @@
 	height: auto;
 	margin: 10px 10px;
 	min-height: 150px;
-	max-width: calc(33.33% - 20px);
+	max-width: 350px;
 }
 .cards {
 	display: flex;
 	flex-wrap: wrap;
 	margin: 20px auto; 
-    max-width: 100%;
-	margin-left: 50px;
+	margin-left: 10px;
+}
+
+.card-body{
+	justify-content: space-between;
 }
 .listItem {
 	margin-top: 10px;
@@ -35,8 +38,8 @@ img {
 	justify-content: center;
 	align-items: center;
 	min-height: 100vh;
-	margin-left: 175px;
-	max-width: 1400px;
+	min-width:  100vh;
+	margin-left: 250px;
 }
 
 .sideBar_menu {
@@ -52,13 +55,24 @@ img {
 	text-decoration: none;
 }
 
-.btn {
-	margin-top: 30px;
 
-	min-width: 180px;
+
+.sideBar_menu .btn {
+	margin-top: 30px;
+	min-width: 200px;
 }
+
+
 ul {
 	list-style-type: none;
+}
+
+.cardBtns{
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: space-around;
+	
 }
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Ubuntu:wght@400;500;700&display=swap');
@@ -74,4 +88,5 @@ ul {
 body {
 	background: linear-gradient(292deg, rgb(117, 154, 194) 47%, rgba(49, 184, 227, 1) 100%);
 	background-repeat: no-repeat;
+	
 }
