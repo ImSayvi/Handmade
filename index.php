@@ -41,19 +41,50 @@ $result = $conn->query($sqlQueryCategories);
         </div>
         <div class="cards">
 
-        <?php
-        while ($row = $result->fetch_assoc()) {
-        echo
-            '<div class="card container-sm">
+            <?php
+            while ($row = $result->fetch_assoc()) {
+                echo
+                '<div class="card container-sm">
                 <img src="images/category/'.$row['file'].'" class="card-img-top" alt='. $row['category_name'] .'>
                 <div class="card-body">
-                    <h5 class="card-title">'. $row['category_name'] .'</h5>
-                    <p class="card-text">'. $row['description'] .'</p>
-                    <a href="categories.php?id_category='.$row['id'].'" class="btn btn-primary">Przejdź do kategorii</a>
+                    <h5 class="card-title">' . $row['category_name'] . '</h5>
+                    <p class="card-text">' . $row['description'] . '</p>
+                    <div class="cardBtns">
+                        <a href="categories.php?id_category=' . $row['id'] . '" class="btn btn-primary">Przejdź do kategorii</a>
+                        <form method="post" onsubmit="confirmDelete();">
+                            <input type="hidden" name="category_id" value="' . $row['id'] . '">
+                            <button type="submit" class="btn btn-primary delete" name="delete_category"><i class="fa-solid fa-trash" style="color: #ffffff;"></i></button>
+                        </form>
+                    </div>
                 </div>  
-            </div>';}
-        ?>
+            </div>';
+            }
+
+
+            ?>
         </div>
+
+        <?php
+        if (isset($_POST['delete_category'])) {
+            require_once "db.php";
+            $categoryId = $_POST['category_id'];
+
+            $deleteQuery = "DELETE FROM categories WHERE id = ?";
+            $statement = $conn->prepare($deleteQuery);
+            $statement->bind_param('i', $categoryId);
+
+            if ($statement->execute()) {
+                exit();
+            } else {
+                echo "Wystąpił błąd podczas usuwania kategorii.";
+            }
+
+
+            $statement->close();
+            $conn->close();
+        }
+        ?>
+     <script src="https://kit.fontawesome.com/988d321f51.js" crossorigin="anonymous"></script>   
 </body>
 
 </html>
