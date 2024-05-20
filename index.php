@@ -36,7 +36,7 @@ $result = $conn->query($sqlQueryCategories);
   </div>
 </div>
 
-<div class="container-lg container ">
+<div class="container-lg container">
 
     <div class="sideBar_menu">
         <ul>
@@ -48,13 +48,10 @@ $result = $conn->query($sqlQueryCategories);
             </li>
             <li class="listItem">
                 <a href="logout.php"><button type="button" class="btn btn-dark">wyloguj</button></a>
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Launch demo modal</button>
-                
             </li>
         </ul>
     </div>
     <div class="cards">
-
         <?php
         while ($row = $result->fetch_assoc()) {
             echo
@@ -76,8 +73,8 @@ $result = $conn->query($sqlQueryCategories);
         ?>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz4fnFO9gybBgFAOWZN4zZXI6p6Ot6C6XHVTfZ8a6VxC6FmP4xFhk7aYYF" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-p5IXYjtx8Q7wo2XB6X4hZ5QWAc4VtMLbQvdJ6VGqKO3Bz4zL2n5w7pbAWf9WW2Rs" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz4fnFO9gybBogGzzeYLAq6m/LiUJ02BBAJ4lz2QYsFUzLkp9fHXaJY6kz" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12mohxFhgJO3lfQ2PEnJLvKX7tDv7Fu0t7Gk93yl2YFoGH7x" crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/988d321f51.js" crossorigin="anonymous"></script>
     <script src="/script/script.js"></script>
 </body>
