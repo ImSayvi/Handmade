@@ -55,10 +55,11 @@ $result = $conn->query($sqlQueryCategories);
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="editModalLabel">Edytuj kategorię!</h5>
+                <h5 class="modal-title" id="editModalLabel">Edytowanie kategorii</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form method="POST" enctype="multipart/form-data" action="addNewCategory.php">
+            <form method="POST" enctype="multipart/form-data" action="update.php">
+                <input type="hidden" id="edit_id" name="id">
                 <div class="modal-body">
                     <div class="mb-3">
                         <label for="edit_name" class="form-label">Nazwa</label>
@@ -75,7 +76,7 @@ $result = $conn->query($sqlQueryCategories);
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Anuluj</button>
-                    <button type="submit" class="btn btn-primary" name="save_data">Dodaj</button>
+                    <button type="submit" class="btn btn-primary" name="save_data">Wprowadź zmiany</button>
                 </div>
             </form>
         </div>
@@ -156,12 +157,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             var name = $(this).data('name');
             var description = $(this).data('description');
 
+            $('#edit_id').val(id); 
             $('#edit_name').val(name);
             $('#edit_description').val(description);
             $('#editmodal').modal('show');
         });
     });
 </script>
+
 </body>
 
 </html>
