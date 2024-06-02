@@ -21,7 +21,16 @@ if (isset($_POST['name']) && !empty($_POST['description']) && isset($_POST['cate
         $file_type=$_FILES['file']['type'];
 
         if(empty($errors)==true){
-            move_uploaded_file($file_tmp,"images/handicratfs/".$file_name);
+            list($width, $height) = getimagesize($file_tmp);
+            $newWidth = 360;
+            $newHeight = 240;
+
+            $imageResized = imagecreatetruecolor($newWidth, $newHeight);
+            $imageTmp = imagecreatefromjpeg($file_tmp);
+            imagecopyresampled($imageResized, $imageTmp, 0, 0, 0, 0, $newWidth, $newHeight, $width, $height);
+            imagejpeg($imageResized, "images/handicrafts/".$file_name);
+            imagedestroy($imageResized);
+            imagedestroy($imageTmp);
         }else{
             print_r($errors);
         }
