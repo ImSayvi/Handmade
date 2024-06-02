@@ -27,11 +27,12 @@ $result = $conn->query($sql);
 
     <div class="sideBar_menu">
         <ul>
-            <li class="listItem">
-                <a href="index.php"><button type="button" class="btn btn-dark">Powrót</button></a>
-            </li>
+            
             <li class="listItem">
                 <a href="addNewProduct.php"><button type="button" class="btn btn-dark">Dodaj nowy produkt</button></a>
+            </li>
+            <li class="listItem">
+                <a href="index.php"><button type="button" class="btn btn-dark">Powrót</button></a>
             </li>
         </ul>
     </div>

@@ -157,7 +157,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             var name = $(this).data('name');
             var description = $(this).data('description');
 
-            $('#edit_id').val(id); 
+            $('#edit_id').val(id);
             $('#edit_name').val(name);
             $('#edit_description').val(description);
             $('#editmodal').modal('show');
