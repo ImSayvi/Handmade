@@ -13,7 +13,7 @@ require_once "db.php";
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://kit.fontawesome.com/988d321f51.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="style/indexStyle.css">
-    <title>Document</title>
+    <title>Handmade</title>
 </head>
 
 <body>
@@ -63,7 +63,7 @@ require_once "db.php";
                     <h5 class="modal-title" id="editModalLabel">Edytowanie kategorii</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form method="POST" enctype="multipart/form-data" action="update.php">
+                <form method="POST" enctype="multipart/form-data" action="update.php" name="editCategoryForm">
                     <input type="hidden" id="edit_id" name="id">
                     <div class="modal-body">
                         <div class="mb-3">
@@ -74,7 +74,12 @@ require_once "db.php";
                             <label for="edit_description" class="form-label">Opis</label>
                             <input type="text" class="form-control" id="edit_description" name="description">
                         </div>
-                        <div class="mb-3">
+                        <div class="mb-3 form-checkbox">
+                            <input type="checkbox" class="form-check-input" id="deleteCategoryImg" name="deleteCategoryImg">
+                            <label class="form-check-label" for="deleteCategoryImg"> Usuń zdjęcie tytułowe kategorii</label>
+                            <p class="text-muted small">Dodane zostanie domyślne zdjęcie</p>
+                        </div>
+                        <div class="mb-3 editDiv">
                             <label for="edit_file" class="form-label">Załącznik</label>
                             <input type="file" class="form-control" id="edit_file" name="file">
                         </div>
@@ -105,6 +110,11 @@ require_once "db.php";
                         <div class="mb-3">
                             <label for="productDescription" class="form-label">Opis produktu</label>
                             <input type="text" class="form-control" id="productDescription" name="description">
+                        </div>
+                        <div class="mb-3">
+                            <label for="tags" class="form-label">Tagi: </label>
+                            <input type="text" class="form-control" id="tags" name="tags">
+                            <p class="text-muted small">Wprowadź tagi z '#'</p>
                         </div>
                         <div class="mb-3">
                             <label for="category" class="form-label">Kategoria</label>
@@ -253,7 +263,7 @@ while ($row = $result->fetch_assoc()) {
         var name = $(this).data('name');
         var description = $(this).data('description');
 
-        console.log(id, name, description); // Sprawdź w konsoli
+        console.log(id, name, description); 
         $('#edit_id').val(id);
         $('#edit_name').val(name);
         $('#edit_description').val(description);

@@ -1,48 +1,82 @@
 <?php
 session_start();
-require('db.php');
+require_once "db.php";
 
 if (isset($_POST['save_data'])) {
     $categoryId = $_POST['id'];
-    $name = $_POST['name'];
-    $description = $_POST['description'];
-
+    $categoryName = ucfirst($_POST['name']);
+    $categoryDescription = ucfirst($_POST['description']);
+    $categoriesPath = 'images/category';
+    $currentDirQuery = "SELECT category_name, file FROM handmade.categories WHERE id='$categoryId'";
+    $currentDirResult = $conn->query($currentDirQuery);
+    $currentCategory = $currentDirResult->fetch_assoc();
+    $currentDir = $categoriesPath . '/' . $currentCategory['category_name'];
+    $newDir = $categoriesPath . '/' . $categoryName;
     $file_name = null;
+
+    // Sprawdzenie, czy zaznaczono opcję usunięcia zdjęcia
+    if (isset($_POST['deleteCategoryImg']) && $_POST['deleteCategoryImg'] == 'on') {
+        // Usuń stare zdjęcie, jeśli istnieje
+        if ($currentCategory['file']) {
+            $oldFilePath = $currentDir . '/' . $currentCategory['file'];
+            if (file_exists($oldFilePath)) {
+                unlink($oldFilePath);
+            }
+        }
+        $file_name = ''; 
+    }
+
     if (isset($_FILES['file']) && $_FILES['file']['size'] > 0) {
-        $errors = array();
         $file_name = $_FILES['file']['name'];
-        $file_size = $_FILES['file']['size'];
         $file_tmp = $_FILES['file']['tmp_name'];
-        $file_type = $_FILES['file']['type'];
 
         if (empty($errors) == true) {
-            list($width, $height) = getimagesize($file_tmp);
-            $newWidth = 360;
-            $newHeight = 240;
+            
+            if ($currentCategory['category_name'] !== $categoryName) {
+                if (file_exists($newDir)) {
+                    echo 'Kategoria z taką nazwą już istnieje';
+                    header('location: index.php');
+                    return;
+                } else {
+                    
+                    rename($currentDir, $newDir);
+                }
+            }
 
-            $imageResized = imagecreatetruecolor($newWidth, $newHeight);
-            $imageTmp = imagecreatefromjpeg($file_tmp);
-            imagecopyresampled($imageResized, $imageTmp, 0, 0, 0, 0, $newWidth, $newHeight, $width, $height);
-            imagejpeg($imageResized, "images/category/" . $file_name);
-            imagedestroy($imageResized);
-            imagedestroy($imageTmp);
+            
+            move_uploaded_file($file_tmp, $newDir . '/' . $file_name);
         } else {
             print_r($errors);
         }
+    } else {
+        // jak nie ma nowego pliku, użyj starego katalogu
+        if ($currentCategory['category_name'] !== $categoryName) {
+            if (file_exists($newDir)) {
+                echo 'Kategoria z taką nazwą już istnieje';
+                header('location: index.php');
+                return;
+            } else {
+                
+                rename($currentDir, $newDir);
+            }
+        }
+        $file_name = $currentCategory['file']; // Zostawienie starego pliku, jeśli nie dodano nowego
     }
 
-    if (!empty($name) && !empty($description)) {
-        $sql = "UPDATE handmade.categories SET category_name='$name', description='$description'";
-        if ($file_name) {
+    if (!empty($categoryName) && !empty($categoryDescription)) {
+        $sql = "UPDATE handmade.categories SET category_name='$categoryName', description='$categoryDescription'";
+        if ($file_name !== null) {
             $sql .= ", file='$file_name'";
         }
         $sql .= " WHERE id='$categoryId'";
 
         if ($conn->query($sql) === TRUE) {
-            echo '<script> alert("Data Updated"); </script>';
+            echo '<script> alert("Dane zostały zaktualizowane"); </script>';
             header('Location: index.php');
             exit();
-        
+        } else {
+            echo '<script> alert("Dane nie zostały zaktualizowane"); </script>';
+        }
     }
 }
 ?>
