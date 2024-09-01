@@ -2,48 +2,42 @@
 session_start();
 require_once "db.php";
 
-$sqlCategory = "SELECT * FROM handmade.categories";
-$result = $conn->query($sqlCategory);
+if (isset($_POST['save_data'])) {
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        $categoryName = ucfirst($_POST['name']);
+        $categoryDescription = ucfirst($_POST['description']);
+        $categoriesPath = 'images/category';
+        $newDir = $categoriesPath . '/' . $categoryName;
+        $isChecked = isset($_POST['addFileCheck']); // isset używamy do checkboxów
 
-if(isset($_POST['save_data'])){
+        
+        $file_name = $isChecked ?  $_FILES['file']['name']: 'default.png';  // z pierwotnego sposobu zostawiam - jesli nie dodano zdjecia, dodaje sie domyslne (teraz rozwiazane przez svg)
+        $file_tmp = $isChecked ?  $_FILES['file']['tmp_name']: ''; 
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $categoryName = $_POST['name'];
-    $categoryDescription = $_POST['description'];
+        
+        if (file_exists($newDir)) {
+            echo 'Taka kategoria już istnieje';
+            header('location: index.php');
+            return;
+        } else {
+            // mkdir robi nowy folder z uprawnieniami 0777 czyli wszystkmi
+            mkdir($newDir, 0777, true);
 
-    if(isset($_FILES['file'])){
-        $errors= array();
-        $file_name = $_FILES['file']['name'];
-        $file_size =$_FILES['file']['size'];
-        $file_tmp =$_FILES['file']['tmp_name'];
-        $file_type=$_FILES['file']['type'];
+            
+            $sql = "INSERT INTO handmade.categories (category_name, description, file) VALUES ('$categoryName', '$categoryDescription', '$file_name')";
+            if ($conn->query($sql) === TRUE) {
+                if ($isChecked) {
+                    //jezeli zaznaczono ze chce sie swoje zdjecie to przenosi fote ktora jest pod tymczasowym tmp do lokalizacji - nowego folderu
+                    move_uploaded_file($file_tmp, $newDir . '/' . $file_name); 
+                        echo 'Kategorie dodano pomyślnie';
+                }
+            } else {
+                echo 'Błąd: ' . $conn->error;
+            }
 
-        if(empty($errors)==true){
-            list($width, $height) = getimagesize($file_tmp);
-            $newWidth = 360;
-            $newHeight = 240;
-
-            $imageResized = imagecreatetruecolor($newWidth, $newHeight);
-            $imageTmp = imagecreatefromjpeg($file_tmp);
-            imagecopyresampled($imageResized, $imageTmp, 0, 0, 0, 0, $newWidth, $newHeight, $width, $height);
-            imagejpeg($imageResized, "images/category/".$file_name);
-            imagedestroy($imageResized);
-            imagedestroy($imageTmp);
-    
-            // move_uploaded_file($file_tmp,"images/category/".$file_name);
-        }else{
-            print_r($errors);
+            $conn->close();
+            header('location: index.php');
         }
     }
-    if(!empty($categoryName) && !empty($categoryDescription) && !empty($file_name)){
-        $sql = "INSERT INTO handmade.categories (category_name, description, file) VALUES ('$categoryName', '$categoryDescription', '$file_name')";
-        $conn->query($sql);
-        $conn->close();
-
-        header('location: index.php');
-    }
 }
-};
-
 ?>
-

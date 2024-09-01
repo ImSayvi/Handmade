@@ -15,3 +15,8 @@ body {
 	background-repeat: no-repeat;
 	
 }
+
+.blueBg{
+	background: linear-gradient(292deg, rgb(117, 154, 194) 47%, rgba(49, 184, 227, 1) 100%);
+	background-repeat: no-repeat;
+}

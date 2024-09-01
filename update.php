@@ -42,9 +42,7 @@ if (isset($_POST['save_data'])) {
             echo '<script> alert("Data Updated"); </script>';
             header('Location: index.php');
             exit();
-        } else {
-            echo '<script> alert("Data not Updated"); </script>';
-        }
+        
     }
 }
 ?>
