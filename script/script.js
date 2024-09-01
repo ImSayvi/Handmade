@@ -1,29 +1,25 @@
+console.log('test');
+    // Dodawanie kategorii
+    const addCategoryForm = document.forms['addCategoryForm'];
+    const addFileDiv = addCategoryForm.querySelector('.fileDiv');
+    const addFileCheck = addCategoryForm['addFileCheck'];
+    const addFormSwitch = addCategoryForm.querySelector('.form-check-label');
+    const addP = addCategoryForm.querySelector('.small');
 
-
-
-
-
-document.addEventListener('DOMContentLoaded', () => {
-    const form = document.forms['addCategoryForm'];
-    const fileDiv = document.querySelector('.fileDiv');
-    const addFileCheck = form['addFileCheck'];
-    const formSwitch = form.querySelector('.form-check-label');
-    const p = form.querySelector('.small');
-
-
-    function updateFileDiv() {
+    function updateAddFileDiv() {
+        
         if (addFileCheck.checked) {
-            fileDiv.classList.remove('visually-hidden');
-            formSwitch.innerText = 'Dodaj zdjecie tytułowe do kategorii';
-            p.innerText = '';
+            addFileDiv.classList.remove('visually-hidden');
+            addFormSwitch.innerText = 'Dodaj zdjęcie tytułowe do kategorii';
+            addP.innerText = '';
         } else {
-            fileDiv.classList.add('visually-hidden');
-            formSwitch.innerText = ' Nie dodawaj tytułowego zdjęcia do kategorii';
-            p.innerText = 'Dodane zostanie domyślne zdjęcie';
+            addFileDiv.classList.add('visually-hidden');
+            addFormSwitch.innerText = 'Nie dodawaj tytułowego zdjęcia do kategorii';
+            addP.innerText = 'Dodane zostanie domyślne zdjęcie';
         }
     }
 
-    updateFileDiv();
+    updateAddFileDiv();
+    addFileCheck.addEventListener('change', updateAddFileDiv);
 
-    addFileCheck.addEventListener('change', updateFileDiv);
-});
+
