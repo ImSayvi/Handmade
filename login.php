@@ -95,3 +95,22 @@ require_once('db.php');
 </html>
 
 
+
+
+
+
+<div class="mb-3">
+                            <label for="icon">Ikonka</label>
+                            <select class="form-select" id="icon" name="icon">
+                                <option selected>wybierz ikonke</option>
+                                <option value='<i class="fa-solid fa-gas-pump"></i>'><i class="fa-solid fa-gas-pump"></i></option>
+                                <option value='<i class="fa-solid fa-umbrella-beach"></i>'><i class="fa-solid fa-umbrella-beach"></i></option>
+                                <option value='<i class="fa-solid fa-horse-head"></i>'><i class="fa-solid fa-horse-head"></i></option>
+                                <option value='<i class="fa-solid fa-graduation-cap"></i>'><i class="fa-solid fa-graduation-cap"></i></option>
+                                <option value='<i class="fa-solid fa-user-ninja"></i>'><i class="fa-solid fa-user-ninja"></i></option>
+                                <option value='<i class="fa-solid fa-poo"></i>'><i class="fa-solid fa-poo"></i></option>
+                                <option value='<i class="fa-solid fa-bolt"></i>'><i class="fa-solid fa-bolt"></i></option>
+                                <option value='<i class="fa-solid fa-money-bill-1"></i>'><i class="fa-solid fa-money-bill-1"></i></option>
+                                
+                            </select>
+                        </div>
